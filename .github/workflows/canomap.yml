@@ -1,0 +1,36 @@
+name: CanoMap v2 Pipeline
+
+on:
+  workflow_dispatch:   # manual run button in GitHub Actions
+
+jobs:
+  run-canomap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
+      - name: Run CanoMap Pipeline
+        run: |
+          python pipelines/run_canomap.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: canomap-results
+          path: |
+            canoMap_final_output.csv
