@@ -1,7 +1,0 @@
-pandas
-numpy
-requests
-networkx
-biopython
-scikit-learn
-tqdm
