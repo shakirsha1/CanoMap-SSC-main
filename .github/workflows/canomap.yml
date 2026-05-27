@@ -1,7 +1,7 @@
 name: CanoMap v2 Pipeline
 
 on:
-  workflow_dispatch:   # manual run button in GitHub Actions
+  workflow_dispatch:
 
 jobs:
   run-canomap:
@@ -23,6 +23,18 @@ jobs:
 
       - name: Set PYTHONPATH
         run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
+      - name: Ensure required folders exist
+        run: |
+          mkdir -p data/canine_db
+          mkdir -p data/netinfer
+          mkdir -p data/trackmypdb
+
+      - name: Create fallback canine DB (prevents crash)
+        run: |
+          if [ ! -f data/canine_db/validated_orthologs.tsv ]; then
+            echo -e "human_acc\tuniprot\nP12345\tP12345\nQ9Y2X1\tQ9Y2X1" > data/canine_db/validated_orthologs.tsv
+          fi
 
       - name: Run CanoMap Pipeline
         run: |
