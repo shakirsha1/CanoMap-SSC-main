@@ -7,7 +7,7 @@ import pandas as pd
 import os
 import time
 
-from modules.trackmypdb_runner.trackmypdb_core import run_trackmypdb_job
+from modules.trackmypdb_runner.trackmypdb_runner import run_trackmypdb
 
 
 def run_trackmypdb(compound_name: str, smiles: str) -> pd.DataFrame:
