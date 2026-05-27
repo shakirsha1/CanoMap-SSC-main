@@ -3,7 +3,7 @@ CanoMap v2 - Main Pipeline Runner
 """
 
 from modules.netinfer_runner.netinfer_runner import run_netinfer
-from modules.trackmypdb_runner.runner import run_trackmypdb
+from modules.trackmypdb_runner.trackmypdb_runner import run_trackmypdb
 from modules.integration_engine.integration_engine import merge_targets
 from modules.canine_rbh.canine_rbh_engine import filter_canine_targets
 from modules.scoring_engine.scoring_engine import score_targets
